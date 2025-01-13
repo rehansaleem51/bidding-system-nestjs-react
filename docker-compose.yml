@@ -1,21 +1,28 @@
 version: '3.9'
 
 services:
-  app:
+  backend:
     build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: bidding-system
-    restart: always
-    env_file:
-      - .env
+      context: ./backend
     ports:
-      - '3000:3000'
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./backend/.env
     depends_on:
       - mysql
       - redis
-    volumes:
-      - .:/usr/src/app
+
+  frontend:
+    build:
+      context: ./frontend
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
 
   mysql:
     image: mysql:8.0

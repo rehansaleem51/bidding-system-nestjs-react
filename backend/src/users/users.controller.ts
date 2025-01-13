@@ -10,12 +10,12 @@ export class UsersController {
 constructor(private readonly usersService: UsersService,@InjectRepository(User)
         private readonly userRepository: Repository<User>) {}    
 
-@Get()   
+@Get('seed')   
 seedUsers(): Promise<void> {     
     return this.usersService.seedUsers();   
   }
   
-@Get('all')   
+@Get()   
   findAll(): Promise<User[]> {     
       return this.userRepository.find();
    

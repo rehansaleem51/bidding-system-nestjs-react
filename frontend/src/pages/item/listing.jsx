@@ -143,7 +143,7 @@ export default function Item() {
                         pathname: `/item/bid/${item.id}`,
                       }}>
                         <Button className='bg-transparent p-0 text-success' variant="link">
-                          <PencilSquare/>
+                          Join Auction
                         </Button>
                       </Link>
                     )}
