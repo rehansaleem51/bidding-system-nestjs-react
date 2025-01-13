@@ -17,9 +17,7 @@ COPY . .
 RUN npm run build
 
 # Expose the application port
-EXPOSE 5000
+EXPOSE 5173
 
-# Serve the app with a simple HTTP server
-RUN npm install -g serve
-CMD ["serve", "-s", "build"]
-
+# Command to run the application
+CMD ["npm", "run", "dev"]
