@@ -1,0 +1,52 @@
+/* Layout Setting */
+.layout {
+    display: flex;
+  }
+  .sidebar {
+    flex: 0 0 auto;
+    width: 270px;
+    transition: left 0.3s;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.05);
+  }
+  
+  .expanded .sidebar {
+    left: -270px; /* Set left to 0 for expanded sidebar */
+  }
+  
+  .content {
+    flex: 1;
+    padding: 30px;
+    transition: margin-left 0.3s;
+    margin-left: 270px;
+    min-height:100vh;
+    position:relative;
+  }
+  
+  .expanded .content  {
+    margin-left: 0px;
+  }
+  .expanded .content .toggle-button{
+    left:0;
+  }
+  @media (max-width: 992px) {
+    .expanded.sidebar {
+      left: -270px; /* Move sidebar off-screen when collapsed */
+      z-index:9;
+    }
+  
+    .content {
+      margin-left: 0; /* Content starts from the beginning when sidebar collapses */
+    }
+  
+    .expanded.sidebar .content {
+      margin-left: 0; /* Content starts from the beginning when sidebar collapses */
+    }
+    .content .toggle-button{
+      left:0;
+    }
+  }

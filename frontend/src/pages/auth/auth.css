@@ -1,0 +1,81 @@
+/* Login */
+.main-auth .row{
+    min-height:100vh;
+  }
+  .auth-content{position: relative;}
+  .auth-content .logo h5{
+    color: #333;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height:22px;
+    margin-bottom:0;
+    text-transform:uppercase;
+  }
+  .auth-content .logo h6{
+    color: #6C6C6C;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height:18px;
+    margin-bottom:0;
+    text-transform:uppercase;
+  }
+  .auth-form label{
+    color: #333;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 12px;
+  }
+  .auth-form .form-control{
+    border-radius: 8px;
+    border: 1px solid #333;
+    height:50px;
+  }
+  .auth-form .form-control:focus{
+    box-shadow:none;
+    outline:0;
+    border: 1px solid #4A74EA;
+  }
+  .bg-holder{
+    background: url("../../assets/images/backgrounds/auth-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
+  }
+  .bg-holder::after{
+    position:absolute;
+    top:0;left:0;bottom:0;right:0;
+    background: linear-gradient(225deg, #025700 0%, rgba(4, 185, 0, 0.79) 100%);
+    opacity: 0.8;
+    mix-blend-mode: multiply;
+    content:'';
+    width:100%;
+    height:100%;
+  }
+  .auth-right{
+    padding:20px 0;
+  }
+  .auth-right .pitb-logo{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+  }
+  .loaderContainer{
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255,255,255,0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}

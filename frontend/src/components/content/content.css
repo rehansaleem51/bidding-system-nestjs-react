@@ -1,0 +1,22 @@
+.toggle-button {
+    position: absolute;
+    top: 37px;
+    left: -15px;
+    z-index: 1;
+    width:27px;
+    height:27px;
+    line-height:14px !important;
+    text-align:center !important;
+    display:inline-block !important;
+    border-radius:50% !important;
+    color:#ffffff !important;
+    border:2px solid #ffffff !important;
+    background:#007C38;
+    padding:0 !important;
+  }
+.contentHeader .contentTitle{
+    color: #333;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+}
