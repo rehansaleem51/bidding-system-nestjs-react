@@ -70,44 +70,54 @@ export const BidPage = () => {
   }, [roomId]);
 
   const handlePlaceBid = async () => {
-    if (!socket) return;
+        if(bidAmount <= highestBid)
+        {
+            setstatusType('error');
+            setShowAlert(true)
+            setErrorMessage('Bid amount should be greater than highest bid')
+        }
+        else
+        {
 
-    // Emit the bid-placing event
-    const payload = { itemId:roomId,bidAmount: bidAmount, userId: user.id }; 
-    console.log(payload);
-    ItemService.bid(payload).then(response => {
-          console.log(response.data);
-          if(response.data.statusCode == 200)
-            {
-                setstatusType('success');
-                setShowAlert(true)
-                setErrorMessage(response.data.message)
-                
-                
-            }
-           else if(response.data.statusCode == 999)
-                {
-                    setstatusType('error');
-                    setShowAlert(true)
-                setErrorMessage(response.data.message)
-                
-                    if (socket) {
-                        socket.emit('place-bid-leave', 'room'+roomId);
-                        socket.disconnect();
+          if (!socket) return;
+
+          // Emit the bid-placing event
+          const payload = { itemId:roomId,bidAmount: bidAmount, userId: user.id }; 
+          console.log(payload);
+          ItemService.bid(payload).then(response => {
+                console.log(response.data);
+                if(response.data.statusCode == 200)
+                  {
+                      setstatusType('success');
+                      setShowAlert(true)
+                      setErrorMessage(response.data.message)
+                      
+                      
+                  }
+                else if(response.data.statusCode == 999)
+                      {
+                          setstatusType('error');
+                          setShowAlert(true)
+                      setErrorMessage(response.data.message)
+                      
+                          if (socket) {
+                              socket.emit('place-bid-leave', 'room'+roomId);
+                              socket.disconnect();
+                            }
+                            navigate('/item/listing');
                       }
-                      navigate('/item/listing');
-                }
-            else
-            {
-                setstatusType('error');
-                setShowAlert(true)
-                setErrorMessage(response.data.message)
-                
-            }   
-            
-        }).catch(error => {
-            console.log(error)
-        });
+                  else
+                  {
+                      setstatusType('error');
+                      setShowAlert(true)
+                      setErrorMessage(response.data.message)
+                      
+                  }   
+                  
+              }).catch(error => {
+                  console.log(error)
+              });
+      }
   };
 
   const handleLeaveRoom = () => {

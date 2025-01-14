@@ -1,12 +1,12 @@
-name: CI/CD Pipeline
+name: Backend CI/CD
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'backend/**'       # Trigger only if files in the backend folder change
   pull_request:
-    branches:
-      - main
+    paths:
+      - 'backend/**' 
 
 jobs:
   build-and-deploy:
@@ -22,20 +22,7 @@ jobs:
       run: |
         docker build -t bidding-backend ./backend
 
-    # Step 3: Build frontend image
-    - name: Build frontend Docker image
-      run: |
-        docker build -t bidding-frontend ./frontend
-
-    # Step 4: Deploy frontend to Vercel
-    - name: Deploy frontend to Vercel
-      uses: amondnet/vercel-action@v25
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-
-    # Step 5: Deploy backend to Render
+    # Step 3: Deploy backend to Render
     - name: Deploy backend to Render
       uses: johnbeynon/render-deploy-action@v0.0.8
       with:
