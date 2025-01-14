@@ -20,7 +20,7 @@ export default function routing() {
             <Route path="/" element={<Layout />}>
               
                 <Route path="/" element={
-                  <Protected Component={Dashboard} routeName={'dashboard'} /> }
+                  <Protected Component={itemListing} routeName={'item_listing'} /> }
                 />
                
                 <Route path='item'>

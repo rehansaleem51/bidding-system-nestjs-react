@@ -4,7 +4,6 @@ import { Socket } from "socket.io";
 
 @WebSocketGateway({
     cors: true,
-    namespace: 'place-bid',
     transports: ['websocket'],
   })
   export class AuctionGateway {
