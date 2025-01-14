@@ -41,9 +41,9 @@ export class ItemsService {
             
             const auctionEndTime = moment.tz(item.auction_end_datetime,'Asia/Karachi'); // Parse the auction end time
             const currentTime = moment.tz(); // Get the current time
-            console.log("Auction End Time:", auctionEndTime.toISOString());
-console.log("Current Time:", currentTime.toISOString());
+            
             if (currentTime.isAfter(auctionEndTime)) {
+              await queryRunner.rollbackTransaction(); // Explicit rollback
                 return {
                     statusCode: 999,
                     message: "Auction has ended",
@@ -52,6 +52,7 @@ console.log("Current Time:", currentTime.toISOString());
             }
         
             if (item.highest_bid && bidAmount <= item.highest_bid) {
+              await queryRunner.rollbackTransaction(); // Explicit rollback
                 return {
                     statusCode: 998,
                     message: "Bid must be higher than the current highest bid",
@@ -60,6 +61,7 @@ console.log("Current Time:", currentTime.toISOString());
             }
 
             if (!item.highest_bid && bidAmount <= item.starting_price) {
+              await queryRunner.rollbackTransaction(); // Explicit rollback
                 return {
                     statusCode: 997,
                     message: "Bid must be higher than the starting price",
@@ -78,7 +80,10 @@ console.log("Current Time:", currentTime.toISOString());
               };
             } catch (error) {
               await queryRunner.rollbackTransaction();
-              throw error;
+              return {
+                statusCode: 996,
+                message: "Bid rejected",
+              };
             } finally {
               await queryRunner.release();
             }

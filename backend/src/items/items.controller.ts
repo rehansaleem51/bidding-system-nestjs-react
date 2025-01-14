@@ -32,11 +32,13 @@ constructor(private readonly itemService: ItemsService,@InjectRepository(Item)
         }
     }
 
+    @UseGuards(AuthGuard)
     @Post()
     async create(@Body() item: Item): Promise<Item> {
       return this.itemService.create(item);
     }
 
+    @UseGuards(AuthGuard)
     @Post('bid')
     @HttpCode(HttpStatus.OK)
     async placeBid(@Body() request: { itemId: number, userId: number, bidAmount: number }) {
