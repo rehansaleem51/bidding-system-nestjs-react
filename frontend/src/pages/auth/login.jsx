@@ -18,6 +18,7 @@ export default function Login() {
     const setTokenAndUser = authStore((state) => state.setTokenAndUser);
     const setIsLoading = spinnerStore((state) => state.setIsLoading);
     const setRedirection = authStore((state) => state.setRedirectionUrl);
+    const setAuthenticated = authStore((state) => state.setAuthenticated);
     const showAlert = sweetAlertStore((state) => state.showAlert);
     const setShowAlert = sweetAlertStore((state) => state.setShowAlert);
     const [errorMessage, setErrorMessage] = useState('');
@@ -33,11 +34,12 @@ export default function Login() {
     const getSubmitHandler = () => (values) => {
         setIsLoading(true);
         UserService.login(values).then(response => {
-            console.log(response)
-            const token = response.data.access_token
-            const user = response.data.user
+            
+            const token = response.data.access_token;
+            const user = response.data.user;
+            setAuthenticated(true);
             setTokenAndUser(token, user, true);
-            //setRedirection("/item/listing");
+            setRedirection("/item/listing");
             setIsLoading(false);
             navigate("/item/listing");
         }).catch(error => {

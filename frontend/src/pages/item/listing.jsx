@@ -59,7 +59,7 @@ export default function Item() {
   }
   const renderTimeLeft = (auctionEndDatetime) => {
     var endTime = new Date(auctionEndDatetime);
-    endTime =   new Date( endTime.getTime() + ( endTime.getTimezoneOffset() * 60000 ) ).getTime();
+    //endTime =   new Date( endTime.getTime() + ( endTime.getTimezoneOffset() * 60000 ) ).getTime();
     const currentTime = new Date().getTime();
     
     if (currentTime > endTime) {
@@ -80,7 +80,7 @@ export default function Item() {
 
   const isExpired = (auctionEndDatetime) => {
     var endTime = new Date(auctionEndDatetime);
-    endTime =   new Date( endTime.getTime() + ( endTime.getTimezoneOffset() * 60000 ) ).getTime();
+    //endTime =   new Date( endTime.getTime() + ( endTime.getTimezoneOffset() * 60000 ) ).getTime();
     const currentTime = new Date().getTime();
     
     if (currentTime > endTime) {

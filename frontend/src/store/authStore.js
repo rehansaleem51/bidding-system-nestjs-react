@@ -11,6 +11,8 @@ export const authStore = create() (
             token: null,
             user: {},
             redirectionUrl: '',
+            setRedirectionUrl: (redirectionUrl) => set({ redirectionUrl }),
+            setAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
             setUser: (user) => set({ user }),
             logout: () => set({isAuthenticated: false, token: null,  user: {} }),
             setTokenAndUser: (token, user, isAuthenticated) => set({ token, user, isAuthenticated}),    

@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bidding-system-front
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '5173:5173'
+    volumes:
+      - .:/usr/src/app
+

@@ -3,6 +3,7 @@ import { Item } from './item.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, QueryRunner, Repository } from 'typeorm';
 import { User } from 'src/users/user.entity';
+import * as moment from 'moment-timezone';  
 
 @Injectable()
 export class ItemsService {
@@ -33,14 +34,16 @@ export class ItemsService {
               throw new Error('Item not found');
             }
            
-            const currentTime = new Date();
+            // const currentTime = new Date();
             
-            const auctionEndTime = new Date(item.auction_end_datetime);
-            const adjustedAuctionEndTime = new Date( auctionEndTime.getTime() + ( auctionEndTime.getTimezoneOffset() * 60000 ) ).getTime();
-            //console.log("currentTime",currentTime);
-            //console.log("adjustedAuctionEndTime",adjustedAuctionEndTime);
-            console.log(currentTime.getHours()+'-' + (currentTime.getMinutes()+1) + '-'+currentTime.getSeconds());
-            if (currentTime > auctionEndTime) {
+            // const auctionEndTime = new Date(item.auction_end_datetime);
+            // const adjustedAuctionEndTime = new Date( auctionEndTime.getTime() + ( auctionEndTime.getTimezoneOffset() * 60000 ) ).getTime();
+            
+            const auctionEndTime = moment.tz(item.auction_end_datetime,'Asia/Karachi'); // Parse the auction end time
+            const currentTime = moment.tz(); // Get the current time
+            console.log("Auction End Time:", auctionEndTime.toISOString());
+console.log("Current Time:", currentTime.toISOString());
+            if (currentTime.isAfter(auctionEndTime)) {
                 return {
                     statusCode: 999,
                     message: "Auction has ended",

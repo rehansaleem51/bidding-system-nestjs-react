@@ -1,7 +1,7 @@
 import React from 'react'
 import {authStore} from '../store/authStore'
 import { Navigate } from "react-router-dom";
-import checkPermission  from '../hooks/checkPermission';
+
 
 export const protectedRoute = (props) => {
     const {Component} = props
@@ -10,9 +10,10 @@ export const protectedRoute = (props) => {
     const token = authStore(state => state.token);
     const user = authStore(state => state.user);
     const redirectionUrl = authStore(state => state.redirectionUrl);
+    
     if(isAuthenticated && token && user) {
        
-
+        
         return (
             <div>
                 <Component />
@@ -20,6 +21,7 @@ export const protectedRoute = (props) => {
         
         );
     } else {
+        
         return <Navigate to="/login" replace />
     }
     
@@ -31,6 +33,7 @@ export const unProtectedRoute = (props) => {
     const token = authStore(state => state.token);
     const redirectionUrl = authStore(state => state.redirectionUrl);
     if(!isAuthenticated && !token) {
+        
         return (
             <div>
                 <Component />
