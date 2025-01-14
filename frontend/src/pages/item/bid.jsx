@@ -43,9 +43,10 @@ export const BidPage = () => {
                 console.log(error)
             })
     // Initialize Socket.IO connection
-    let socket_url=import.meta.env.VITE_REACT_APP_BACKEND_BASE_URL+"place-bid";
+    let socket_url=import.meta.env.VITE_REACT_APP_BACKEND_BASE_URL;
     
     const newSocket = io(socket_url, {
+      path: '/place-bid',
       transports: ['websocket'], // Use WebSocket transport
     });
 
